@@ -11,13 +11,12 @@
   "author": "Mikael Siidorow",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^3.6.1",
+    "apollo-server": "^2.25.2",
     "dotenv": "^10.0.0",
-    "graphql": "^16.2.0",
+    "graphql": "^15.5.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.17",
     "mongoose-unique-validator": "^2.0.3",
-    "nodemon": "^2.0.15",
-    "uuid": "^8.3.2"
+    "nodemon": "^2.0.15"
   }
 }
