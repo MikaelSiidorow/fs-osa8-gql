@@ -7,8 +7,8 @@ const Authors = (props) => {
   const [selectedAuthor, setSelectedAuthor] = useState(null)
   const [born, setBorn] = useState('')
 
-  const [ editAuthor ] = useMutation(EDIT_AUTHOR, {
-    refetchQueries: [ { query: ALL_AUTHORS }],
+  const [editAuthor] = useMutation(EDIT_AUTHOR, {
+    refetchQueries: [{ query: ALL_AUTHORS }],
     onError: (error) => {
       console.log(error.graphQLErrors[0].message)
     }
@@ -22,7 +22,7 @@ const Authors = (props) => {
   const submit = async (event) => {
     event.preventDefault()
 
-    editAuthor({ variables: { name: selectedAuthor.value, setBornTo: parseInt(born) }})
+    editAuthor({ variables: { name: selectedAuthor.value, setBornTo: parseInt(born) } })
 
     setBorn('')
   }
@@ -51,24 +51,28 @@ const Authors = (props) => {
           )}
         </tbody>
       </table>
-      <h2>Set birthyear</h2>
-      <form onSubmit={submit}>
+      {!props.user ? null :
         <div>
-          <Select
-            defaultValue={selectedAuthor}
-            onChange={setSelectedAuthor}
-            options={authors.map(a => ({ value: a.name, label: a.name }))}
-          />
+          <h2>Set birthyear</h2>
+          <form onSubmit={submit}>
+            <div>
+              <Select
+                defaultValue={selectedAuthor}
+                onChange={setSelectedAuthor}
+                options={authors.map(a => ({ value: a.name, label: a.name }))}
+              />
+            </div>
+            <div>
+              born
+              <input
+                value={born}
+                onChange={({ target }) => setBorn(target.value)}
+              />
+            </div>
+            <button type='submit'>update author</button>
+          </form>
         </div>
-        <div>
-          born
-          <input
-          value={born}
-          onChange={({ target }) => setBorn(target.value)}
-          />
-        </div>
-        <button type='submit'>update author</button>
-      </form>
+      }
     </div>
   )
 }
